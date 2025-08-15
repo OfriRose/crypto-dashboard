@@ -1,0 +1,7 @@
+# Poetry
+.venv/
+poetry.lock
+
+# Gemini
+.gemini/
+.gemini.lock

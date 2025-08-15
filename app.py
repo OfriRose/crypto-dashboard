@@ -1,12 +1,8 @@
-from flask import Flask, render_template
+import streamlit as st
 import requests
 import pandas as pd
 import plotly.express as px
-import json
-import plotly
 from datetime import datetime, timedelta
-
-app = Flask(__name__)
 
 def get_crypto_data():
     """Fetches a few cryptocurrency prices from the CoinGecko API."""
@@ -20,7 +16,7 @@ def get_crypto_data():
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching simple data: {e}")
+        st.error(f"Error fetching simple data: {e}")
         return None
 
 def get_historical_data(coin_id, days='30'):
@@ -35,13 +31,19 @@ def get_historical_data(coin_id, days='30'):
         response.raise_for_status()
         return response.json()['prices']
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching historical data for {coin_id}: {e}")
+        st.error(f"Error fetching historical data for {coin_id}: {e}")
         return []
 
-@app.route('/')
-def home():
+def main():
+    st.title("Crypto Dashboard")
+
     crypto_data = get_crypto_data()
-    
+
+    if crypto_data:
+        st.subheader("Current Prices")
+        for coin, data in crypto_data.items():
+            st.write(f"{coin.capitalize()}: ${data['usd']:,}")
+
     historical_dfs = []
     if crypto_data:
         for coin_id in crypto_data.keys():
@@ -54,6 +56,8 @@ def home():
 
     if historical_dfs:
         historical_df = pd.concat(historical_dfs)
+
+        st.subheader("Historical Price (Last 30 Days)")
         
         # Create a Plotly line graph
         fig = px.line(
@@ -65,11 +69,7 @@ def home():
             labels={'timestamp': 'Date', 'price': 'Price in USD', 'crypto': 'Cryptocurrency'}
         )
         
-        graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    else:
-        graph_json = None
-
-    return render_template('index.html', crypto_data=crypto_data, graph_json=graph_json)
+        st.plotly_chart(fig)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
