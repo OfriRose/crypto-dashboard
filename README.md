@@ -1,28 +1,36 @@
-Crypto Dashboard: Full-Stack Data Visualization Platform 📈
+Crypto Dashboard (Streamlit Refactor) 📈
 
-An interactive platform built with Python, Flask, and Plotly to provide real-time and historical cryptocurrency market analysis. This project demonstrates core skills in full-stack development, API integration, and data visualization.
+An interactive data application built with Streamlit and Python. This project demonstrates skills in rapid prototyping and creating user-driven data tools with a single, clean codebase.
 
-🚀 Key Features
+🚀 Live Demo
 
-    Real-Time Data Integration: Connects to the CoinGecko API to fetch and display up-to-the-minute cryptocurrency prices.
+Experience the dashboard live: https://rose-crypto-dashboard.streamlit.app/
 
-    Dynamic Data Visualization: Generates and renders a historical price chart using the Plotly library, allowing for interactive exploration of market trends over the past 30 days.
+💡 Key Features
 
-    Modular Architecture: The backend logic (data fetching and processing) is decoupled from the frontend presentation (HTML templates), showcasing an understanding of maintainable and scalable web application design.
+    Interactive Controls: Users can dynamically select specific cryptocurrencies and a time range for analysis, providing a responsive and user-driven experience.
 
-    Efficient Data Handling: Utilizes the Pandas library for efficient data manipulation and preparation, demonstrating a strong foundation in data science libraries.
+    Advanced Data Analysis: The historical price chart now includes a 7-day moving average, calculated using Pandas, to help identify market trends.
+
+    Single-Script Application: The entire dashboard is built in a single Python file, eliminating the need for separate HTML, CSS, and JavaScript.
+
+    Real-Time Data Integration: Pulls live and historical data from the CoinGecko API.
 
 🛠️ Technology Stack
 
-    Backend: Python, Flask, Pandas, Requests
+    Framework: Streamlit
 
-    Frontend: HTML, Jinja2, Plotly.js (via CDN)
+    Data Processing: Pandas
 
-    Deployment & Management: Git, Poetry
+    Visualization: Plotly
+
+    API: CoinGecko API
+
+    Dependency Management: Poetry
 
 ▶️ Quick Start
 
-This project is ready to run with a simple local setup.
+You can either visit the live demo or run the application locally.
 
     Clone the repository:
     Bash
@@ -38,14 +46,7 @@ poetry install
 Run the application:
 Bash
 
-    poetry run python app.py
+    poetry run streamlit run streamlit_app.py
 
-    Navigate to http://127.0.0.1:5000 to view the dashboard.
+    A new browser tab will automatically open, displaying the dashboard.
 
-💡 Project Roadmap
-
-    Implement User Interactivity: Add forms to allow users to select specific cryptocurrencies and customize the historical time range.
-
-    Advanced Data Analysis: Integrate Pandas to calculate and visualize a moving average on the historical price chart, demonstrating time-series analysis skills.
-
-    Refactor to Streamlit: Restructure the project to use a data-centric framework to showcase the ability to rapidly prototype and build data applications.
